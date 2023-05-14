@@ -114,3 +114,68 @@ TEST_CASE("BSTree delete function") {
         CHECK(tree.search(14) == 14);
     }
 }
+
+TEST_CASE("BSTree height function") {
+  BSTree tree;
+
+  SUBCASE("Empty tree") {
+    CHECK(tree.findHeight() == 0);
+  }
+
+  SUBCASE("Tree with one node") {
+    tree.insert(10);
+    CHECK(tree.findHeight() == 1);
+  }
+
+  SUBCASE("Tree with two nodes") {
+    tree.insert(10);
+    tree.insert(5);
+    CHECK(tree.findHeight() == 2);
+  }
+
+  SUBCASE("Tree with three nodes") {
+    tree.insert(10);
+    tree.insert(5);
+    tree.insert(15);
+    CHECK(tree.findHeight() == 2);
+  }
+
+  SUBCASE("Tree with four nodes") {
+    tree.insert(10);
+    tree.insert(5);
+    tree.insert(15);
+    tree.insert(3);
+    CHECK(tree.findHeight() == 3);
+  }
+
+  SUBCASE("Tree with five nodes") {
+    tree.insert(10);
+    tree.insert(5);
+    tree.insert(15);
+    tree.insert(3);
+    tree.insert(7);
+    CHECK(tree.findHeight() == 3);
+  }
+
+  SUBCASE("Tree with six nodes") {
+    tree.insert(10);
+    tree.insert(5);
+    tree.insert(15);
+    tree.insert(3);
+    tree.insert(7);
+    tree.insert(17);
+    CHECK(tree.findHeight() == 3);
+  }
+
+  SUBCASE("Tree with seven nodes") {
+    tree.insert(10);
+    tree.insert(5);
+    tree.insert(15);
+    tree.insert(3);
+    tree.insert(7);
+    tree.insert(17);
+    tree.insert(13);
+    CHECK(tree.findHeight() == 3);
+  }
+}
+

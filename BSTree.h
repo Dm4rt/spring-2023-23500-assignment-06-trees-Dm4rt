@@ -27,6 +27,8 @@ public:
   int findMinimum();
   void remove(int n, Node *walker, Node *trailer);
   void remove(int n);
+  int findHeight(Node *node);
+  int findHeight();
 
   int treesum();
   int treesum(Node *n);

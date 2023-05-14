@@ -287,7 +287,22 @@ void BSTree::remove(int n){
   	Node *walker = root;
   	remove(n, walker, trailer);
 }
-
+int BSTree::findHeight(Node* node){
+    if (node == nullptr) {
+        return 0;
+    } else {
+        int left_height = findHeight(node->getLeft());
+        int right_height = findHeight(node->getRight());
+        return std::max(left_height, right_height) + 1;
+    }
+}
+int BSTree::findHeight(){
+	if(root==nullptr){
+		return 0;
+	}
+	Node *new_node = root;
+	return findHeight(root);
+}
 int BSTree::treesum(Node *n){
   if (n==nullptr){
     return 0;
