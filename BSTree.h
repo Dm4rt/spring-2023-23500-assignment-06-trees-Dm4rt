@@ -29,6 +29,8 @@ public:
   void remove(int n);
   int findHeight(Node *node);
   int findHeight();
+  int countLeaves(Node *node);
+  int countLeaves();
 
   int treesum();
   int treesum(Node *n);

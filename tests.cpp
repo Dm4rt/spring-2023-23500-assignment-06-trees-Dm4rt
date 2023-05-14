@@ -116,66 +116,108 @@ TEST_CASE("BSTree delete function") {
 }
 
 TEST_CASE("BSTree height function") {
-  BSTree tree;
+	BSTree tree;
 
-  SUBCASE("Empty tree") {
-    CHECK(tree.findHeight() == 0);
-  }
+	SUBCASE("Empty tree") {
+		CHECK(tree.findHeight() == 0);
+	}
 
-  SUBCASE("Tree with one node") {
-    tree.insert(10);
-    CHECK(tree.findHeight() == 1);
-  }
+	SUBCASE("Tree with one node") {
+		tree.insert(10);
+		CHECK(tree.findHeight() == 1);
+	}
 
-  SUBCASE("Tree with two nodes") {
-    tree.insert(10);
-    tree.insert(5);
-    CHECK(tree.findHeight() == 2);
-  }
+	SUBCASE("Tree with two nodes") {
+		tree.insert(10);
+		tree.insert(5);
+		CHECK(tree.findHeight() == 2);
+	}
 
-  SUBCASE("Tree with three nodes") {
-    tree.insert(10);
-    tree.insert(5);
-    tree.insert(15);
-    CHECK(tree.findHeight() == 2);
-  }
+	SUBCASE("Tree with three nodes") {
+		tree.insert(10);
+		tree.insert(5);
+		tree.insert(15);
+		CHECK(tree.findHeight() == 2);
+	}
 
-  SUBCASE("Tree with four nodes") {
-    tree.insert(10);
-    tree.insert(5);
-    tree.insert(15);
-    tree.insert(3);
-    CHECK(tree.findHeight() == 3);
-  }
+	SUBCASE("Tree with four nodes") {
+		tree.insert(10);
+		tree.insert(5);
+		tree.insert(15);
+		tree.insert(3);
+		CHECK(tree.findHeight() == 3);
+	}
 
-  SUBCASE("Tree with five nodes") {
-    tree.insert(10);
-    tree.insert(5);
-    tree.insert(15);
-    tree.insert(3);
-    tree.insert(7);
-    CHECK(tree.findHeight() == 3);
-  }
+	SUBCASE("Tree with five nodes") {
+		tree.insert(10);
+		tree.insert(5);
+		tree.insert(15);
+		tree.insert(3);
+		tree.insert(7);
+		CHECK(tree.findHeight() == 3);
+	}
 
-  SUBCASE("Tree with six nodes") {
-    tree.insert(10);
-    tree.insert(5);
-    tree.insert(15);
-    tree.insert(3);
-    tree.insert(7);
-    tree.insert(17);
-    CHECK(tree.findHeight() == 3);
-  }
+	SUBCASE("Tree with six nodes") {
+		tree.insert(10);
+		tree.insert(5);
+		tree.insert(15);
+		tree.insert(3);
+		tree.insert(7);
+		tree.insert(17);
+		CHECK(tree.findHeight() == 3);
+	}
 
-  SUBCASE("Tree with seven nodes") {
-    tree.insert(10);
-    tree.insert(5);
-    tree.insert(15);
-    tree.insert(3);
-    tree.insert(7);
-    tree.insert(17);
-    tree.insert(13);
-    CHECK(tree.findHeight() == 3);
-  }
+	SUBCASE("Tree with seven nodes") {
+		tree.insert(10);
+		tree.insert(5);
+		tree.insert(15);
+		tree.insert(3);
+		tree.insert(7);
+		tree.insert(17);
+		tree.insert(13);
+		CHECK(tree.findHeight() == 3);
+	}
 }
 
+
+TEST_CASE("BSTree countLeaves() function") {
+    	BSTree tree;
+
+	SUBCASE("Empty tree should have 0 leaves") {
+		CHECK(tree.countLeaves() == 0);
+	}
+
+	SUBCASE("Tree with one node should have 1 leaf") {
+		tree.insert(5);
+		CHECK(tree.countLeaves() == 1);
+	}
+
+	SUBCASE("Tree with only left children should have leaves equal to the height") {
+		tree.insert(5);
+		tree.insert(4);
+		tree.insert(3);
+		tree.insert(2);
+		tree.insert(1);
+		CHECK(tree.countLeaves() == 1);
+	}
+
+	SUBCASE("Tree with only right children should have leaves equal to the height") {
+		tree.insert(5);
+		tree.insert(6);
+		tree.insert(7);
+		tree.insert(8);
+		tree.insert(9);
+		CHECK(tree.countLeaves() == 1);
+	}
+
+	SUBCASE("Tree with both left and right children should have leaves less than the height") {
+		tree.insert(5);
+		tree.insert(3);
+		tree.insert(7);
+		tree.insert(2);
+		tree.insert(4);
+		tree.insert(6);
+		tree.insert(8);
+		CHECK(tree.countLeaves() == 4);
+	}
+}
