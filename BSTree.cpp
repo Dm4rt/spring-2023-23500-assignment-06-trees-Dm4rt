@@ -95,10 +95,28 @@ int BSTree::search(int n){
 
 //Trying to make rsearch Part 1
 int BSTree::rsearch(int value, Node *p){
-
+	if(p==nullptr){
+		throw std::out_of_range("not found value");
+		//return;
+	}
+	int node_val = p->getData();
+	if(node_val == value){
+		return node_val;
+	}
+	else if(value < node_val){
+		return rsearch(value, p->getLeft());
+	}
+	else{
+		return rsearch(value, p->getRight());
+	}
+  	
 }
 int BSTree::rsearch(int value){
-
+	Node *current =  root;
+	if(current == nullptr){
+		throw std::out_of_range("empty tree search");
+	}
+	return rsearch(value, root);
 }
 
 
@@ -143,6 +161,40 @@ void BSTree::insert(int n){
     trailer->setRight(new_node);
   }
      
+}
+
+//attempt recursive insert
+void BSTree::rinsert(int n, Node *v, Node *w, Node *p){
+	if(w==nullptr){
+		if (n < p->getData()){
+    			p->setLeft(v);
+  		} else {
+    			p->setRight(v);
+  		}
+		return;
+	}
+	
+	if(n < w->getData()){
+		rinsert(n, v, w->getLeft(),w);
+	}
+	else if(n > w->getData()){
+		rinsert(n, v, w->getRight(),w);
+	}else{
+		//assume values are same so increment
+	}
+	
+	
+}
+void BSTree::rinsert(int n){
+	Node *new_node = new Node(n);
+	// special case if the tree is empty
+  	if (root == nullptr){
+    		root = new_node;
+    		return;
+  	}
+  	Node *trailer = nullptr;
+  	Node *walker = root;
+  	rinsert(n, new_node, walker, trailer);
 }
 
 int BSTree::treesum(Node *n){

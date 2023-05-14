@@ -25,7 +25,14 @@ int main()
   }
 
   t->insert(17);
-  
+  //p1
+   try {
+  n = t->rsearch(17);
+  std::cout << "found " << n << "\n";
+  } catch (int e){
+    std::cout << 17 << " not found\n";
+  }
+  //p1
   n = t->search(17);
   std::cout << "found " << n << "\n";
 
