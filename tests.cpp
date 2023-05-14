@@ -72,3 +72,45 @@ TEST_CASE("Testing BSTree::rinsert function") {
         CHECK(tree.rsearch(5) == 5);
     }
 }
+
+TEST_CASE("BSTree delete function") {
+    SUBCASE("Delete leaf node") {
+        BSTree tree;
+        tree.insert(10);
+        tree.insert(5);
+        tree.insert(15);
+        tree.insert(7);
+        tree.remove(7);
+        CHECK_THROWS_AS(tree.rsearch(7), std::out_of_range);
+        CHECK(tree.search(5) == 5);
+    }
+
+    SUBCASE("Delete node with one child") {
+        BSTree tree;
+        tree.insert(10);
+        tree.insert(5);
+        tree.insert(15);
+        tree.insert(7);
+        tree.remove(5);
+        CHECK_THROWS_AS(tree.rsearch(5), std::out_of_range);
+        CHECK(tree.search(7) == 7);
+        CHECK(tree.search(15) == 15);
+    }
+
+    SUBCASE("Delete node with two children") {
+        BSTree tree;
+        tree.insert(10);
+        tree.insert(5);
+        tree.insert(15);
+        tree.insert(7);
+        tree.insert(13);
+        tree.insert(17);
+        tree.insert(12);
+        tree.insert(14);
+        tree.remove(15);
+        CHECK_THROWS_AS(tree.rsearch(2), std::out_of_range);
+        CHECK(tree.search(17) == 17);
+        CHECK(tree.search(12) == 12);
+        CHECK(tree.search(14) == 14);
+    }
+}

@@ -48,6 +48,10 @@ int main()
   std::cout << t2->treesum() << "\n";
   std::cout << t2->countodds() << "\n";
   std::cout << t2->oddsum() << "\n";
+  
+  //part 2
+  t2->remove(2);
+  
   return 0;
 }
 

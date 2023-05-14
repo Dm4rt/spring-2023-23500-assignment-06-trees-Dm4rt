@@ -23,6 +23,10 @@ public:
   void insert(int value);
   void rinsert(int n, Node *v, Node *w, Node *p);
   void rinsert(int value);
+  int findMinimum(Node *walker, Node *trailer);
+  int findMinimum();
+  void remove(int n, Node *walker, Node *trailer);
+  void remove(int n);
 
   int treesum();
   int treesum(Node *n);

@@ -197,6 +197,97 @@ void BSTree::rinsert(int n){
   	rinsert(n, new_node, walker, trailer);
 }
 
+//attempting part 2 delete function
+int BSTree::findMinimum(Node *walker, Node *trailer){
+	if(walker==nullptr){
+		throw std::out_of_range("empty tree search");
+	}
+	trailer=walker; //catch up trailer
+	if(walker->getLeft()==nullptr){
+		return trailer->getData();
+	}
+	return findMinimum(walker->getLeft(),trailer);
+}
+
+int BSTree::findMinimum(){
+	if(root==nullptr){
+		throw std::out_of_range("empty tree search");
+	}
+	Node *walker=root;
+	Node *trailer=nullptr;
+	return findMinimum(walker, trailer);
+}
+void BSTree::remove(int n, Node *walker, Node *trailer){
+	if(walker->getData()==n){
+		//check if has children
+		Node *left = walker->getLeft();
+		Node *right = walker->getRight();
+		if(left==nullptr && right ==nullptr){
+			//has no children
+			if(n>trailer->getData()){
+				trailer->setRight(nullptr);
+			}
+			else{
+				trailer->setLeft(nullptr);
+			}
+		}
+		else{
+			//three subcases:
+			if(left==nullptr&&right!=nullptr){
+				//has only right child
+				if(n>trailer->getData()){
+					trailer->setRight(right);
+				}
+				else{
+					trailer->setLeft(right);
+				}			
+			}
+			else if(left!=nullptr&&right==nullptr){
+				//has only left child
+				if(n>trailer->getData()){
+					trailer->setRight(left);
+				}
+				else{
+					trailer->setLeft(left);
+				}
+			}
+			else{
+				//has both children
+				trailer = walker;
+				int min = findMinimum(walker->getRight(), walker);
+				//remove min value first, so as to not conflict
+				remove(min);
+				//replace trailer data with min data
+				trailer->setData(min);
+				
+			}
+		}
+		return;
+	}
+	else if(walker->getData()<n){
+		remove(n, walker->getRight(), walker);
+	}
+	else{
+		remove(n, walker->getLeft(), walker);
+	}
+}
+void BSTree::remove(int n){
+	//special case if tree is empty
+	if (root == nullptr){
+    		throw std::out_of_range("empty tree remove");
+  	}
+  	
+  	//special case, if root is value
+  	if(root->getData()==n){
+  		root = nullptr;
+  		return;
+  	}
+  	
+  	Node *trailer = nullptr;
+  	Node *walker = root;
+  	remove(n, walker, trailer);
+}
+
 int BSTree::treesum(Node *n){
   if (n==nullptr){
     return 0;
